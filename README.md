@@ -1,5 +1,5 @@
-openlldp Module
-===============
+Open-LLDP Module
+================
 
 master branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-openlldp.png?branch=master)](http://travis-ci.org/razorsedge/puppet-openlldp)
 develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-openlldp.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-openlldp)
@@ -25,7 +25,7 @@ Class documentation is available via puppetdoc.
 Examples
 --------
 
-    include 'openlldp'
+    class { 'openlldp': }
 
 
 Notes
