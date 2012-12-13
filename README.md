@@ -1,5 +1,5 @@
-openlldp Module
-===============
+Open-LLDP Module
+================
 
 master branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-openlldp.png?branch=master)](http://travis-ci.org/razorsedge/puppet-openlldp)
 develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-openlldp.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-openlldp)
@@ -7,11 +7,12 @@ develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-
 Introduction
 ------------
 
-This module ....
+This module installs [Open-LLDP](http://www.open-lldp.org/).  lldpad (LLDP Agent Daemon) is a GPL licensed implementation of the Link Layer Discovery Protocol for Linux.
 
 Actions:
 
-* None
+* Installs Open-LLDP (lldpad).
+* Starts lldpad.
 
 OS Support:
 
@@ -24,7 +25,7 @@ Class documentation is available via puppetdoc.
 Examples
 --------
 
-    include 'openlldp'
+    class { 'openlldp': }
 
 
 Notes
@@ -40,7 +41,8 @@ Issues
 TODO
 ----
 
-* None
+* Provide LLDP facts via facter.
+* Configure lldpad to receive and/or transmit LLDP frames via  the included lldptool.
 
 License
 -------
