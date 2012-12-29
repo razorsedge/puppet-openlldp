@@ -1,6 +1,7 @@
 # Fact:
 #   lldp_neighbor_chassisid_<interface>
-#   lldp_neighbor_mngaddr_<interface>
+#   lldp_neighbor_mngaddr_ipv4_<interface>
+#   lldp_neighbor_mngaddr_ipv6_<interface>
 #   lldp_neighbor_mtu_<interface>
 #   lldp_neighbor_portid_<interface>
 #   lldp_neighbor_sysname_<interface>
@@ -29,15 +30,18 @@ end
 if File.exists?('/usr/sbin/lldptool')
   lldp = {
     # LLDP Name    Numeric value
-    'chassisID' => '1',
-    'portID'    => '2',
-    'sysName'   => '5',
-    'mngAddr'   => '8',
-    'VLAN'      => '0x0080c201',
-    'MTU'       => '0x00120f04',
+    'chassisID'    => '1',
+    'portID'       => '2',
+    'sysName'      => '5',
+    'mngAddr_ipv4' => '8',
+    'mngAddr_ipv6' => '8',
+    'VLAN'         => '0x0080c201',
+    'MTU'          => '0x00120f04',
   }
 
-  Facter.value('interfaces').split(/,/).grep_v(/^lo$|^dummy[0-9]|^bond[0-9]/).each do |interface|
+  # Remove interfaces that pollute the list (like lo and bond0).
+  Facter.value('interfaces').split(/,/).grep_v(/^lo$|^bond[0-9]/).each do |interface|
+    # Loop through the list of LLDP TLVs that we want to present as facts.
     lldp.each_pair do |key, value|
       Facter.add("lldp_neighbor_#{key}_#{interface}") do
         setcode do
@@ -47,33 +51,27 @@ if File.exists?('/usr/sbin/lldptool')
             case key
             when 'sysName', 'MTU'
               output.split("\n").each do |line|
-                if line.match(/^\s+(.*)/) then
-                  result = $1
-                end
+                result = $1 if line.match(/^\s+(.*)/)
               end
             when 'chassisID'
               output.split("\n").each do |line|
-                if line.match(/MAC:\s+(.*)/) then
-                  result = $1
-                end
+                result = $1 if line.match(/MAC:\s+(.*)/)
               end
             when 'portID'
               output.split("\n").each do |line|
-                if line.match(/Ifname:\s+(.*)/) then
-                  result = $1
-                end
+                result = $1 if line.match(/Ifname:\s+(.*)/)
               end
-            when 'mngAddr'
+            when 'mngAddr_ipv4'
               output.split("\n").each do |line|
-                if line.match(/IPv4:\s+(.*)/) then
-                  result = $1
-                end
+                result = $1 if line.match(/IPv4:\s+(.*)/)
+              end
+            when 'mngAddr_ipv6'
+              output.split("\n").each do |line|
+                result = $1 if line.match(/IPv6:\s+(.*)/)
               end
             when 'VLAN'
               output.split("\n").each do |line|
-                if line.match(/Info:\s+(.*)/) then
-                  result = $1.to_i
-                end
+                result = $1.to_i if line.match(/Info:\s+(.*)/)
               end
             else
               # case default

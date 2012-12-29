@@ -18,6 +18,8 @@ if [ -x /usr/sbin/lldptool ]; then
       :
     elif echo "$INTERFACE" | grep -q ^bond[0-9]; then
       :
+#    elif echo "$INTERFACE" | grep -q ^vmnet[0-9]; then
+#      :
     else
       # Loop through the list of LLDP TLVs that we want to present
       # as facts.
@@ -45,10 +47,15 @@ if [ -x /usr/sbin/lldptool ]; then
             fi
             ;;
           mngAddr)
-            mngAddr=$(lldptool get-tlv -n -i $INTERFACE -V 8 2>/dev/null | awk -F: '/IPv4:/{print $2}')
+            mngAddr=$(lldptool get-tlv -n -i $INTERFACE -V 8 -c ipv4 2>/dev/null | awk -F: '/IPv4:/{print $2}')
             mngAddr=$(trim "$mngAddr")
             if [ -n "$mngAddr" ]; then
-              echo "lldp_neighbor_mngAddr_${INTERFACE} => ${mngAddr}"
+              echo "lldp_neighbor_mngAddr_ipv4_${INTERFACE} => ${mngAddr}"
+            fi
+            mngAddr=$(lldptool get-tlv -n -i $INTERFACE -V 8 -c ipv6 2>/dev/null | awk '/IPv6:/{print $NF}')
+            mngAddr=$(trim "$mngAddr")
+            if [ -n "$mngAddr" ]; then
+              echo "lldp_neighbor_mngAddr_ipv6_${INTERFACE} => ${mngAddr}"
             fi
             ;;
           VLAN)
