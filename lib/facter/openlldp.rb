@@ -5,7 +5,7 @@
 #   lldp_neighbor_mtu_<interface>
 #   lldp_neighbor_portid_<interface>
 #   lldp_neighbor_sysname_<interface>
-#   lldp_neighbor_vlan_<interface>
+#   lldp_neighbor_pvid_<interface>
 #
 # Purpose:
 #   Return information about the host's LLDP neighbors.
@@ -37,7 +37,7 @@ if File.exists?('/usr/sbin/lldptool')
     'sysName'      => '5',
     'mngAddr_ipv4' => '8',
     'mngAddr_ipv6' => '8',
-    'VLAN'         => '0x0080c201',
+    'PVID'         => '0x0080c201',
     'MTU'          => '0x00120f04',
   }
 
@@ -72,7 +72,7 @@ if File.exists?('/usr/sbin/lldptool')
               output.split("\n").each do |line|
                 result = $1 if line.match(/IPv6:\s+(.*)/)
               end
-            when 'VLAN'
+            when 'PVID'
               output.split("\n").each do |line|
                 result = $1.to_i if line.match(/Info:\s+(.*)/)
               end
