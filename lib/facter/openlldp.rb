@@ -20,6 +20,8 @@
 #   Ethernet interface.
 #
 
+require 'facter/util/macaddress'
+
 # http://www.ruby-forum.com/topic/3418285#1040695
 module Enumerable
   def grep_v(cond)
@@ -55,7 +57,8 @@ if File.exists?('/usr/sbin/lldptool')
               end
             when 'chassisID'
               output.split("\n").each do |line|
-                result = $1 if line.match(/MAC:\s+(.*)/)
+                ether = $1 if line.match(/MAC:\s+(.*)/)
+                result = Facter::Util::Macaddress.standardize(ether)
               end
             when 'portID'
               output.split("\n").each do |line|
