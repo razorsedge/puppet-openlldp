@@ -7,8 +7,8 @@
 # === Parameters:
 #
 # [*title*]
-#   The name of the Ethernet interface on which to transmit LLDP TLVs. (Ex: eth0,
-#   em1)  Bonding interfaces are not supported.
+#   The name of the Ethernet interface on which to transmit LLDP TLVs. (Ex:
+#   eth0, em1)  Bonding interfaces are not supported.
 #
 # [*portDesc*]
 #   Whether to transmit the Port Description TLV (Type = 4).
@@ -32,7 +32,8 @@
 #
 # [*bridgescope*]
 #   Specify the bridge scope upon which to operate.
-#   Values: nearest_bridge (nb), nearest_customer_bridge (ncb), nearest_nontpmr_bridge (nntpmrb)
+#   Values: nearest_bridge (nb), nearest_customer_bridge (ncb),
+#     nearest_nontpmr_bridge (nntpmrb)
 #   Default: nb
 #
 # === Actions:

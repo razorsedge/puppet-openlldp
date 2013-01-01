@@ -1,6 +1,7 @@
 # == Define: openlldp::config::lldp
 #
-# Manages the sending and/or receiving of LLDP frames via the Open-LLDP software.
+# Manages the sending and/or receiving of LLDP frames via the Open-LLDP
+# software.
 # http://www.open-lldp.org/
 #
 # === Parameters:
@@ -18,7 +19,8 @@
 #
 # [*bridgescope*]
 #   Specify the bridge scope upon which to operate.
-#   Values: nearest_bridge (nb), nearest_customer_bridge (ncb), nearest_nontpmr_bridge (nntpmrb)
+#   Values: nearest_bridge (nb), nearest_customer_bridge (ncb),
+#     nearest_nontpmr_bridge (nntpmrb)
 #   Default: nb
 #
 # === Actions:
