@@ -11,8 +11,8 @@
 #   Return information about the host's LLDP neighbors.
 #
 # Resolution:
-#   On hosts with the /usr/sbin/lldptool binary, send queries to the lldpad
-#   for each of the host's Ethernet interfaces and parse the output.
+#   On hosts with the lldptool binary, send queries to the lldpad for each of
+#   the host's Ethernet interfaces and parse the output.
 #
 # Caveats:
 #   Assumes that the connected Ethernet switch is sending LLDPDUs, Open-LLDP
@@ -29,7 +29,7 @@ module Enumerable
   end
 end
 
-if File.exists?('/usr/sbin/lldptool')
+if Facter::Util::Resolution.which('lldptool')
   lldp = {
     # LLDP Name    Numeric value
     'chassisID'    => '1',
