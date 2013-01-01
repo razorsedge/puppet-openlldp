@@ -50,7 +50,8 @@ define openlldp::config::lldp (
   Class['openlldp'] -> Openlldp::Config::Lldp[$title]
 
   $interface = $title
-  validate_re($adminstatus, [ '^disabled$', '^rx$', '^tx$', '^rxtx$' ], '$adminstatus parameter must be disabled, rx, tx, or rxtx.')
+  validate_re($adminstatus, [ '^disabled$', '^rx$', '^tx$', '^rxtx$' ])
+  #validate_re($adminstatus, [ '^disabled$', '^rx$', '^tx$', '^rxtx$' ], '$adminstatus parameter must be disabled, rx, tx, or rxtx.')
   case $bridgescope {
     /^(nearest_bridge|nb)$/: {
       $scope = '-g nb'

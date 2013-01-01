@@ -75,12 +75,18 @@ define openlldp::config::tlv (
   Class['openlldp'] -> Openlldp::Config::Tlv[$title]
 
   $interface = $title
-  validate_re($portDesc, [ '^yes$', '^no$' ], '$portDesc parameter must be yes or no.')
-  validate_re($sysName,  [ '^yes$', '^no$' ], '$sysName parameter must be yes or no.')
-  validate_re($sysDesc,  [ '^yes$', '^no$' ], '$sysDesc parameter must be yes or no.')
-  validate_re($sysCap,   [ '^yes$', '^no$' ], '$sysCap parameter must be yes or no.')
-  validate_re($mngAddr,  [ '^yes$', '^no$' ], '$mngAddr parameter must be yes or no.')
-  #validate_re($status, [ '^yes$', '^no$' ], '$status parameter must be yes or no.')
+  validate_re($portDesc, [ '^yes$', '^no$' ])
+  validate_re($sysName,  [ '^yes$', '^no$' ])
+  validate_re($sysDesc,  [ '^yes$', '^no$' ])
+  validate_re($sysCap,   [ '^yes$', '^no$' ])
+  validate_re($mngAddr,  [ '^yes$', '^no$' ])
+  #validate_re($status, [ '^yes$', '^no$' ])
+  #validate_re($portDesc, [ '^yes$', '^no$' ], '$portDesc parameter must be yes or no.')
+  #validate_re($sysName,  [ '^yes$', '^no$' ], '$sysName parameter must be yes or no.')
+  #validate_re($sysDesc,  [ '^yes$', '^no$' ], '$sysDesc parameter must be yes or no.')
+  #validate_re($sysCap,   [ '^yes$', '^no$' ], '$sysCap parameter must be yes or no.')
+  #validate_re($mngAddr,  [ '^yes$', '^no$' ], '$mngAddr parameter must be yes or no.')
+  ##validate_re($status, [ '^yes$', '^no$' ], '$status parameter must be yes or no.')
   case $bridgescope {
     /^(nearest_bridge|nb)$/: {
       $scope = '-g nb'
