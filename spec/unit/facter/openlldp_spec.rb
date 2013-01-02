@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'openlldp facts' do
-  before do
+  before :each do
     Facter.fact(:interfaces).stubs(:value).returns('em2,lo')
     # Explicitly load the openlldp.rb file which contains generated facts
     # that cannot be automatically loaded. Puppet 2.x implements
