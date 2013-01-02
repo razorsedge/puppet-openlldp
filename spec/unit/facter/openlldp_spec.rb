@@ -15,6 +15,9 @@ describe 'openlldp facts' do
       Facter.collection.loader.load(:openlldp)
     end
   end
+  after :each do
+    Facter.clear
+  end
 
   context 'if lldptool is not installed' do
     it 'facts should not run' do
@@ -37,8 +40,10 @@ describe 'openlldp facts' do
 
       it 'no lldp_neighbor_* facts should be available' do
         # I have no idea what I am doing here. How do I test for code that does not run?
-        proc { Facter.value(:lldp_neighbor_portid_em2) }.should_not raise_error
-        Facter.value(:lldp_neighbor_portid_em2).should be_nil
+        proc { Facter.value(:lldp_neighbor_chassisid_em2) }.should_not raise_error
+        Facter.value(:lldp_neighbor_chassisid_em2).should be_nil
+        proc { Facter.value(:lldp_neighbor_portid_lo) }.should_not raise_error
+        Facter.value(:lldp_neighbor_portid_lo).should be_nil
       end
     end
 
