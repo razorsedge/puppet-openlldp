@@ -86,7 +86,8 @@ describe 'openlldp facts' do
       it 'lldp_neighbor_chassisid_em2 is 00:21:86:9f:89:17' do
         Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 1 2>/dev/null').returns(my_fixture_read('chassisID'))
         #Facter.value(:lldp_neighbor_chassisid_em2).should == '00:21:86:9f:89:17'
-        Facter.value(:lldp_neighbor_chassisid_em2).should eq('00:21:86:9f:89:17')
+        #Facter.value(:lldp_neighbor_chassisid_em2).should eq('00:21:86:9f:89:17')
+        Facter.fact(:lldp_neighbor_chassisid_em2).value.should == '00:21:86:9f:89:17'
       end
       it 'lldp_neighbor_portid_em2 is Ethernet40' do
         Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 2 2>/dev/null').returns(my_fixture_read('portID'))
@@ -116,7 +117,8 @@ describe 'openlldp facts' do
       it 'lldp_neighbor_mtu_em2 is 9236' do
         Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 0x00120f04 2>/dev/null').returns(my_fixture_read('MTU'))
         #Facter.value(:lldp_neighbor_mtu_em2).should == '9236'
-        Facter.value(:lldp_neighbor_mtu_em2).should eq('9236')
+        #Facter.value(:lldp_neighbor_mtu_em2).should eq('9236')
+        Facter.fact(:lldp_neighbor_mtu_em2).value.should eq('9236')
       end
     end
   end
