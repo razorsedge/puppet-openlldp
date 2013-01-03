@@ -47,34 +47,10 @@ describe 'openlldp facts' do
       end
     end
 
-    context 'with no LLDP neighbor' do
+    context 'with incorrect/inactive ethernet interface' do
       it 'lldp_neighbor_chassisid_em2 is nil' do
-        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 1 2>/dev/null').returns(nil)
+        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 1 2>/dev/null').returns(my_fixture_read('device_not_found'))
         Facter.value(:lldp_neighbor_chassisid_em2).should be_nil
-      end
-      it 'lldp_neighbor_portid_em2 is nil' do
-        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 2 2>/dev/null').returns(nil)
-        Facter.value(:lldp_neighbor_portid_em2).should be_nil
-      end
-      it 'lldp_neighbor_sysname_em2 is nil' do
-        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 5 2>/dev/null').returns(nil)
-        Facter.value(:lldp_neighbor_sysname_em2).should be_nil
-      end
-      it 'lldp_neighbor_mngaddr_ipv4_em2 is nil' do
-        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 8 2>/dev/null').returns(nil)
-        Facter.value(:lldp_neighbor_mngaddr_ipv4_em2).should be_nil
-      end
-      it 'lldp_neighbor_mngaddr_ipv6_em2 is nil' do
-        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 8 2>/dev/null').returns(nil)
-        Facter.value(:lldp_neighbor_mngaddr_ipv6_em2).should be_nil
-      end
-      it 'lldp_neighbor_pvid_em2 is nil' do
-        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 0x0080c201 2>/dev/null').returns(nil)
-        Facter.value(:lldp_neighbor_pvid_em2).should be_nil
-      end
-      it 'lldp_neighbor_mtu_em2 is nil' do
-        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 0x00120f04 2>/dev/null').returns(nil)
-        Facter.value(:lldp_neighbor_mtu_em2).should be_nil
       end
     end
 
@@ -106,6 +82,37 @@ describe 'openlldp facts' do
       it 'lldp_neighbor_mtu_em2 is 9236' do
         Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 0x00120f04 2>/dev/null').returns(my_fixture_read('MTU'))
         Facter.value(:lldp_neighbor_mtu_em2).should == '9236'
+      end
+    end
+
+    context 'with no LLDP neighbor' do
+      it 'lldp_neighbor_chassisid_em2 is nil' do
+        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 1 2>/dev/null').returns(nil)
+        Facter.value(:lldp_neighbor_chassisid_em2).should be_nil
+      end
+      it 'lldp_neighbor_portid_em2 is nil' do
+        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 2 2>/dev/null').returns(nil)
+        Facter.value(:lldp_neighbor_portid_em2).should be_nil
+      end
+      it 'lldp_neighbor_sysname_em2 is nil' do
+        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 5 2>/dev/null').returns(nil)
+        Facter.value(:lldp_neighbor_sysname_em2).should be_nil
+      end
+      it 'lldp_neighbor_mngaddr_ipv4_em2 is nil' do
+        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 8 2>/dev/null').returns(nil)
+        Facter.value(:lldp_neighbor_mngaddr_ipv4_em2).should be_nil
+      end
+      it 'lldp_neighbor_mngaddr_ipv6_em2 is nil' do
+        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 8 2>/dev/null').returns(nil)
+        Facter.value(:lldp_neighbor_mngaddr_ipv6_em2).should be_nil
+      end
+      it 'lldp_neighbor_pvid_em2 is nil' do
+        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 0x0080c201 2>/dev/null').returns(nil)
+        Facter.value(:lldp_neighbor_pvid_em2).should be_nil
+      end
+      it 'lldp_neighbor_mtu_em2 is nil' do
+        Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 0x00120f04 2>/dev/null').returns(nil)
+        Facter.value(:lldp_neighbor_mtu_em2).should be_nil
       end
     end
   end
