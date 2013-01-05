@@ -29,7 +29,8 @@ module Enumerable
   end
 end
 
-if Facter::Util::Resolution.which('lldptool')
+#if Facter::Util::Resolution.which('lldptool')
+if File.exists?('/usr/sbin/lldptool')
   lldp = {
     # LLDP Name    Numeric value
     'chassisID'    => '1',
