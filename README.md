@@ -13,10 +13,13 @@ Actions:
 
 * Installs Open-LLDP (lldpad).
 * Starts lldpad.
+* Provides LLDP neighbor facts via facter (requires lldpad running and configured to at least receive LLDP frames on each Ethernet interface).
+* Configures lldpad to receive and/or transmit LLDP frames via the included lldptool.
+* Configures lldpad to transmit LLDP TLVs.
 
 OS Support:
 
-* RedHat family - tested on CentOS 5.5+ and CentOS 6.2+
+* RedHat family - tested on CentOS 6.3
 * SuSE family   - presently unsupported (patches welcome)
 * Debian family - presently unsupported (patches welcome)
 
@@ -27,11 +30,27 @@ Examples
 
     class { 'openlldp': }
 
+    # Configure lldpad to receive and transmit LLDP frames on the specific interface.
+    openlldp::config::lldp { 'eth0':
+      adminstatus => 'rxtx',
+    }
+
+    # Configure lldpad to transmit Basic LLDP TLVs.
+    # openlldp::config::lldp adminstatus has to be tx or rxtx for these to transmit.
+    openlldp::config::tlv { 'eth0':
+      portDesc => 'yes',
+      sysName  => 'yes',
+      sysDesc  => 'yes',
+      sysCap   => 'yes',
+      mngAddr  => 'yes',
+    }
+
 
 Notes
 -----
 
-* None
+* Open-LLDP talks about applying configurations globally by not specifying "-i ethX" to lldptool. This has not worked with the versions tested (0.9.43), thus a global configuration mode has not been built into the Puppet module.
+* PVID TLV is not suported as a keyword with the versions tested (0.9.43), thus the code uses numerical values for all TLVs.
 
 Issues
 ------
@@ -41,8 +60,7 @@ Issues
 TODO
 ----
 
-* Provide LLDP facts via facter.
-* Configure lldpad to receive and/or transmit LLDP frames via  the included lldptool.
+* None
 
 License
 -------
