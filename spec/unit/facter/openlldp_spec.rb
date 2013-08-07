@@ -138,4 +138,15 @@ describe 'lldptool is installed' do
       Facter.value(:lldp_neighbor_mtu_em2).should == '9236'
     end
   end
+
+  context 'with Nexus LLDP neighbor' do
+    it 'lldp_neighbor_portid_em2 is Eth102/1/32' do
+      Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 2 2>/dev/null').returns(my_fixture_read('portID-nexus'))
+      Facter.value(:lldp_neighbor_portid_em2).should == 'Eth102/1/32'
+    end
+    it 'lldp_neighbor_pvid_em2 is 116' do
+      Facter::Util::Resolution.stubs(:exec).with('lldptool get-tlv -n -i em2 -V 0x0080c201 2>/dev/null').returns(my_fixture_read('PVID-nexus'))
+      Facter.value(:lldp_neighbor_pvid_em2).should == 116
+    end
+  end
 end
