@@ -36,6 +36,7 @@ describe 'openlldp::config::tlv', :type => 'define' do
   context 'default parameters' do
     tlvlist.each do |tlv|
       it { should contain_exec("set-tlv myETHERNET #{tlv}").with(
+        :path    => ['/bin', '/usr/sbin'],
         :command => "lldptool set-tlv -i myETHERNET -g nb -V #{tlv} -c enableTx=no",
         :onlyif  => "lldptool get-tlv -i myETHERNET -g nb -V #{tlv} -c enableTx | grep -qv enableTx=no"
       )}
@@ -47,6 +48,7 @@ describe 'openlldp::config::tlv', :type => 'define' do
       let(:params) {{ tlv.to_sym => 'yes' }}
 
       it { should contain_exec("set-tlv myETHERNET #{tlv}").with(
+        :path    => ['/bin', '/usr/sbin'],
         :command => "lldptool set-tlv -i myETHERNET -g nb -V #{tlv} -c enableTx=yes",
         :onlyif  => "lldptool get-tlv -i myETHERNET -g nb -V #{tlv} -c enableTx | grep -qv enableTx=yes"
       )}
@@ -61,6 +63,7 @@ describe 'openlldp::config::tlv', :type => 'define' do
     end
 
     it { should contain_exec('set-tlv myETHERNET portDesc').with(
+      :path    => ['/bin', '/usr/sbin'],
       :command => 'lldptool set-tlv -i myETHERNET -g nntpmrb -V portDesc -c enableTx=yes',
       :onlyif  => 'lldptool get-tlv -i myETHERNET -g nntpmrb -V portDesc -c enableTx | grep -qv enableTx=yes'
     )}
