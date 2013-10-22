@@ -97,6 +97,11 @@ define openlldp::config::tlv (
     }
   }
 
+  Exec {
+    # /bin/grep & /usr/sbin/lldptool
+    path => ['/bin', '/usr/sbin']
+  }
+
   exec { "set-tlv ${interface} portDesc" :
     command => "lldptool set-tlv -i ${interface} ${scope} -V portDesc -c enableTx=${portDesc}",
     onlyif  => "lldptool get-tlv -i ${interface} ${scope} -V portDesc -c enableTx | grep -qv enableTx=${portDesc}",
