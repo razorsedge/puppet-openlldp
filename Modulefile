@@ -1,11 +1,10 @@
-name    'razorsedge-openlldp'
-version '0.1.0'
+name 'razorsedge-openlldp'
+version '0.2.0'
+
 author 'razorsedge'
 license 'Apache License, Version 2.0'
 project_page 'https://github.com/razorsedge/puppet-openlldp'
 source 'git://github.com/razorsedge/puppet-openlldp.git'
-summary 'This module installs Open-LLDP.'
-description 'UNKNOWN'
-
-## Add dependencies, if any:
-dependency 'puppetlabs/stdlib', '>=2.1.0'
+summary 'Install and manage Open-LLDP services.'
+description 'This module manages the installation Open-LLDP, a GPL licensed implementation of the Link Layer Discovery Protocol.'
+dependency 'puppetlabs/stdlib', '>=2.3.0'

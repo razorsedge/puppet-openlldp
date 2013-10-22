@@ -68,6 +68,8 @@ define openlldp::config::lldp (
   }
 
   exec { "set-lldp ${interface}" :
+    # /bin/grep & /usr/sbin/lldptool
+    path    => ['/bin', '/usr/sbin'],
     command => "lldptool set-lldp -i ${interface} ${scope} adminStatus=${adminstatus}",
     onlyif  => "lldptool get-lldp -i ${interface} ${scope} adminStatus | grep -qv adminStatus=${adminstatus}",
   }

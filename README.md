@@ -1,5 +1,5 @@
-Open-LLDP Module
-================
+Puppet Open-LLDP Module
+=======================
 
 master branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-openlldp.png?branch=master)](http://travis-ci.org/razorsedge/puppet-openlldp)
 develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-openlldp.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-openlldp)
@@ -61,6 +61,11 @@ TODO
 ----
 
 * None
+
+Contributing
+------------
+
+Please see DEVELOP.md for contribution information.
 
 License
 -------

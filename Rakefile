@@ -7,3 +7,19 @@ RSpec::Core::RakeTask.new(:spec_standalonev) do |t|
   t.pattern = 'spec/{classes,defines,unit}/**/*_spec.rb'
 end
 
+# https://github.com/stahnma/puppet-modules/blob/master/common/Rakefile
+desc "Check puppet and ERB for syntax errors."
+task :validate do
+  Dir['manifests/**/*.pp'].each do |path|
+    sh "puppet parser validate --noop #{path}"
+  end
+  Dir['templates/**/*.erb'].each do |path|
+    sh "erb -P -x -T '-' #{path} | ruby -c"
+  end
+end
+
+# Enable puppet-lint for all manifests: rake lint
+require 'puppet-lint/tasks/puppet-lint'
+#PuppetLint.configuration.send("disable_80chars") # no warnings on lines over 80 chars.
+PuppetLint.configuration.ignore_paths = ["spec/fixtures/**/*.pp", "pkg/**/*"]
+

@@ -63,7 +63,7 @@ if File.exists?('/usr/sbin/lldptool')
               end
             when 'portID'
               output.split("\n").each do |line|
-                result = $1 if line.match(/Ifname:\s+(.*)/)
+                result = $1 if line.match(/(?:Ifname|Local):\s+(.*)/)
               end
             when 'mngAddr_ipv4'
               output.split("\n").each do |line|
@@ -75,7 +75,7 @@ if File.exists?('/usr/sbin/lldptool')
               end
             when 'PVID'
               output.split("\n").each do |line|
-                result = $1.to_i if line.match(/Info:\s+(.*)/)
+                result = $1.to_i if line.match(/(?:Info|PVID):\s+(.*)/)
               end
             else
               # case default
