@@ -1,5 +1,5 @@
 name 'razorsedge-openlldp'
-version '0.1.0'
+version '0.2.0'
 
 author 'razorsedge'
 license 'Apache License, Version 2.0'
