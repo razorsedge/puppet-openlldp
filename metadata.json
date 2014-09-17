@@ -1,6 +1,6 @@
 {
   "name": "razorsedge-openlldp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "razorsedge",
   "summary": "Open-LLDP installation and management.",
   "license": "Apache License, Version 2.0",
