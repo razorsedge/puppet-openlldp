@@ -28,23 +28,24 @@ Class documentation is available via puppetdoc.
 Examples
 --------
 
-    class { 'openlldp': }
+```puppet
+class { 'openlldp': }
 
-    # Configure lldpad to receive and transmit LLDP frames on the specific interface.
-    openlldp::config::lldp { 'eth0':
-      adminstatus => 'rxtx',
-    }
+# Configure lldpad to receive and transmit LLDP frames on the specific interface.
+openlldp::config::lldp { 'eth0':
+  adminstatus => 'rxtx',
+}
 
-    # Configure lldpad to transmit Basic LLDP TLVs.
-    # openlldp::config::lldp adminstatus has to be tx or rxtx for these to transmit.
-    openlldp::config::tlv { 'eth0':
-      portDesc => 'yes',
-      sysName  => 'yes',
-      sysDesc  => 'yes',
-      sysCap   => 'yes',
-      mngAddr  => 'yes',
-    }
-
+# Configure lldpad to transmit Basic LLDP TLVs.
+# openlldp::config::lldp adminstatus has to be tx or rxtx for these to transmit.
+openlldp::config::tlv { 'eth0':
+  portDesc => 'yes',
+  sysName  => 'yes',
+  sysDesc  => 'yes',
+  sysCap   => 'yes',
+  mngAddr  => 'yes',
+}
+```
 
 Notes
 -----

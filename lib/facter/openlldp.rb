@@ -19,6 +19,12 @@
 #   (lldpad) is running, and lldpad is configured to receive LLDPDUs on each
 #   Ethernet interface.
 #
+# Authors:
+#   Mike Arnold <mike@razorsedge.org>
+#
+# Copyright:
+#   Copyright (C) 2012 Mike Arnold, unless otherwise noted.
+#
 
 require 'facter/util/macaddress'
 
