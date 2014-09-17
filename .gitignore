@@ -1,4 +1,2 @@
-metadata.json
 pkg/
 *.swp
-Gemfile.lock
