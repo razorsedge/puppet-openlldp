@@ -1,3 +1,6 @@
 ---
 spec/spec_helper.rb:
   unmanaged: true
+.puppet-lint.rc:
+  extra_disabled_lint_checks:
+  - '--no-variable_contains_upcase-check'
