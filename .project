@@ -3,6 +3,7 @@
 	<name>openlldp</name>
 	<comment></comment>
 	<projects>
+		<project>stdlib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -20,4 +21,33 @@
 		<nature>com.puppetlabs.geppetto.pp.dsl.ui.puppetNature</nature>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 	</natures>
+	<filteredResources>
+		<filter>
+			<id>1343284996756</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-pkg</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1378879474985</id>
+			<name></name>
+			<type>26</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-projectRelativePath-matches-false-false-spec/fixtures/modules</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1428386119416</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-projectRelativePath-matches-false-false-.vendor</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>
