@@ -26,8 +26,6 @@
 #   Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
 
-require 'facter/util/macaddress'
-
 # http://www.ruby-forum.com/topic/3418285#1040695
 module Enumerable
   def grep_v(cond)
@@ -65,7 +63,7 @@ if File.exists?('/usr/sbin/lldptool')
             when 'chassisID'
               output.split("\n").each do |line|
                 ether = $1 if line.match(/MAC:\s+(.*)/)
-                result = Facter::Util::Macaddress.standardize(ether)
+                result ether.split(":").map{|x| "0#{x}"[-2..-1]}.join(":")
               end
             when 'portID'
               output.split("\n").each do |line|
