@@ -7,7 +7,7 @@
   "project_page": "https://github.com/razorsedge/puppet-openlldp",
   "issues_url": "https://github.com/razorsedge/puppet-openlldp/issues",
   "source": "https://github.com/razorsedge/puppet-openlldp.git",
-  "tags": [ "RHEL", "rhel", "OEL", "CentOS", "lldp", "facts" ],
+  "tags": [ "lldp", "facts" ],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
