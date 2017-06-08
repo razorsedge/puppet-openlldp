@@ -4,4 +4,5 @@
 --no-class_inherits_from_params_class-check
 --no-documentation-check
 --no-single_quote_string_with_variables-check
+--no-variable_contains_upcase-check
 --no-variable_is_lowercase-check
