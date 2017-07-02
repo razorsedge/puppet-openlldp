@@ -27,7 +27,7 @@ describe 'openlldp::config::lldp', :type => 'define' do
     it { should contain_exec('set-lldp myETHERNET').with(
       :path    => ['/bin', '/usr/sbin'],
       :command => 'lldptool set-lldp -i myETHERNET -g nb adminStatus=disabled',
-      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nb adminStatus | grep -qv adminStatus=disabled'
+      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nb adminStatus | grep -qv adminStatus=disabled$'
     )}
   end
 
@@ -37,7 +37,7 @@ describe 'openlldp::config::lldp', :type => 'define' do
     it { should contain_exec('set-lldp myETHERNET').with(
       :path    => ['/bin', '/usr/sbin'],
       :command => 'lldptool set-lldp -i myETHERNET -g nb adminStatus=rx',
-      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nb adminStatus | grep -qv adminStatus=rx'
+      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nb adminStatus | grep -qv adminStatus=rx$'
     )}
   end
 
@@ -47,7 +47,7 @@ describe 'openlldp::config::lldp', :type => 'define' do
     it { should contain_exec('set-lldp myETHERNET').with(
       :path    => ['/bin', '/usr/sbin'],
       :command => 'lldptool set-lldp -i myETHERNET -g nb adminStatus=tx',
-      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nb adminStatus | grep -qv adminStatus=tx'
+      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nb adminStatus | grep -qv adminStatus=tx$'
     )}
   end
 
@@ -57,7 +57,7 @@ describe 'openlldp::config::lldp', :type => 'define' do
     it { should contain_exec('set-lldp myETHERNET').with(
       :path    => ['/bin', '/usr/sbin'],
       :command => 'lldptool set-lldp -i myETHERNET -g nb adminStatus=rxtx',
-      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nb adminStatus | grep -qv adminStatus=rxtx'
+      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nb adminStatus | grep -qv adminStatus=rxtx$'
     )}
   end
 
@@ -85,7 +85,7 @@ describe 'openlldp::config::lldp', :type => 'define' do
     it { should contain_exec('set-lldp myETHERNET').with(
       :path    => ['/bin', '/usr/sbin'],
       :command => 'lldptool set-lldp -i myETHERNET -g ncb adminStatus=rxtx',
-      :onlyif  => 'lldptool get-lldp -i myETHERNET -g ncb adminStatus | grep -qv adminStatus=rxtx'
+      :onlyif  => 'lldptool get-lldp -i myETHERNET -g ncb adminStatus | grep -qv adminStatus=rxtx$'
     )}
   end
 
@@ -99,7 +99,7 @@ describe 'openlldp::config::lldp', :type => 'define' do
     it { should contain_exec('set-lldp myETHERNET').with(
       :path    => ['/bin', '/usr/sbin'],
       :command => 'lldptool set-lldp -i myETHERNET -g nntpmrb adminStatus=rxtx',
-      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nntpmrb adminStatus | grep -qv adminStatus=rxtx'
+      :onlyif  => 'lldptool get-lldp -i myETHERNET -g nntpmrb adminStatus | grep -qv adminStatus=rxtx$'
     )}
   end
 

@@ -1,6 +1,12 @@
 ---
+.travis.yml:
+  extras:
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="~> 2.7.0" FACTER_GEM_VERSION="~> 1.6.0"
+  - rvm: 1.8.7
+    env: PUPPET_GEM_VERSION="~> 2.7.0" FACTER_GEM_VERSION="~> 1.7.0"
 spec/spec_helper.rb:
   unmanaged: true
 .puppet-lint.rc:
   extra_disabled_lint_checks:
-  - '--no-variable_contains_upcase-check'
+  - '--no-variable_is_lowercase-check'

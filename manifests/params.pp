@@ -18,31 +18,41 @@ class openlldp::params {
 
   # If we have a top scope variable defined, use it, otherwise fall back to a
   # hardcoded value.
-  $ensure = $::openlldp_ensure ? {
-    undef   => 'present',
-    default => $::openlldp_ensure,
+  $openlldp_ensure = getvar('::openlldp_ensure')
+  if $openlldp_ensure {
+    $ensure = $::openlldp_ensure
+  } else {
+    $ensure = 'present'
   }
 
-  $package_name = $::openlldp_package_name ? {
-    undef   => 'lldpad',
-    default => $::openlldp_package_name,
+  $openlldp_package_name = getvar('::openlldp_package_name')
+  if $openlldp_package_name {
+    $package_name = $::openlldp_package_name
+  } else {
+    $package_name = 'lldpad'
   }
 
-  $service_ensure = $::openlldp_service_ensure ? {
-    undef   => 'running',
-    default => $::openlldp_service_ensure,
+  $openlldp_service_ensure = getvar('::openlldp_service_ensure')
+  if $openlldp_service_ensure {
+    $service_ensure = $::openlldp_service_ensure
+  } else {
+    $service_ensure = 'running'
   }
 
-  $service_name = $::openlldp_service_name ? {
-    undef   => 'lldpad',
-    default => $::openlldp_service_name,
+  $openlldp_service_name = getvar('::openlldp_service_name')
+  if $openlldp_service_name {
+    $service_name = $::openlldp_service_name
+  } else {
+    $service_name = 'lldpad'
   }
 
   # Since the top scope variable could be a string (if from an ENC), we might
   # need to convert it to a boolean.
-  $autoupgrade = $::openlldp_autoupgrade ? {
-    undef   => false,
-    default => $::openlldp_autoupgrade,
+  $openlldp_autoupgrade = getvar('::openlldp_autoupgrade')
+  if $openlldp_autoupgrade {
+    $autoupgrade = $::openlldp_autoupgrade
+  } else {
+    $autoupgrade = false
   }
   if is_string($autoupgrade) {
     $safe_autoupgrade = str2bool($autoupgrade)
@@ -50,9 +60,11 @@ class openlldp::params {
     $safe_autoupgrade = $autoupgrade
   }
 
-  $service_enable = $::openlldp_service_enable ? {
-    undef   => true,
-    default => $::openlldp_service_enable,
+  $openlldp_service_enable = getvar('::openlldp_service_enable')
+  if $openlldp_service_enable {
+    $service_enable = $::openlldp_service_enable
+  } else {
+    $service_enable = true
   }
   if is_string($service_enable) {
     $safe_service_enable = str2bool($service_enable)
@@ -60,9 +72,11 @@ class openlldp::params {
     $safe_service_enable = $service_enable
   }
 
-  $service_hasrestart = $::openlldp_service_hasrestart ? {
-    undef   => true,
-    default => $::openlldp_service_hasrestart,
+  $openlldp_service_hasrestart = getvar('::openlldp_service_hasrestart')
+  if $openlldp_service_hasrestart {
+    $service_hasrestart = $::openlldp_service_hasrestart
+  } else {
+    $service_hasrestart = true
   }
   if is_string($service_hasrestart) {
     $safe_service_hasrestart = str2bool($service_hasrestart)
@@ -70,9 +84,11 @@ class openlldp::params {
     $safe_service_hasrestart = $service_hasrestart
   }
 
-  $service_hasstatus = $::openlldp_service_hasstatus ? {
-    undef   => true,
-    default => $::openlldp_service_hasstatus,
+  $openlldp_service_hasstatus = getvar('::openlldp_service_hasstatus')
+  if $openlldp_service_hasstatus {
+    $service_hasstatus = $::openlldp_service_hasstatus
+  } else {
+    $service_hasstatus = true
   }
   if is_string($service_hasstatus) {
     $safe_service_hasstatus = str2bool($service_hasstatus)

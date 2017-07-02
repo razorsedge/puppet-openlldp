@@ -1,13 +1,13 @@
 {
   "name": "razorsedge-openlldp",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "author": "razorsedge",
   "summary": "Open-LLDP installation and management.",
   "license": "Apache-2.0",
   "project_page": "https://github.com/razorsedge/puppet-openlldp",
   "issues_url": "https://github.com/razorsedge/puppet-openlldp/issues",
   "source": "https://github.com/razorsedge/puppet-openlldp.git",
-  "tags": [ "RHEL", "rhel", "OEL", "CentOS", "lldp", "facts" ],
+  "tags": [ "lldp", "facts" ],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -29,10 +29,6 @@
     }
   ],
   "requirements": [
-    {
-      "name": "pe",
-      "version_requirement": "3.x"
-    },
     {
       "name": "puppet",
       "version_requirement": ">=2.7.20 <5.0.0"
