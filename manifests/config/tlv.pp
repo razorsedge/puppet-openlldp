@@ -30,6 +30,15 @@
 #   Whether to transmit the Management Address TLV (Type = 8).
 #   Default: no
 #
+# [*portIDsubtype*]
+#   Set subtype for portID TLV (Type = 2. Mandatory).
+#   This will determine what the portID TLV displays.
+#   Possible values:
+#     mac (or PORT_ID_MAC_ADDRESS)       - mac address
+#     ip  (or PORT_ID_NETWORK_ADDRESS)   - ip address
+#     ifname (or PORT_ID_INTERFACE_NAME) - interface name
+#   Default: undef => OS default (mac)
+#
 # [*bridgescope*]
 #   Specify the bridge scope upon which to operate.
 #   Values: nearest_bridge (nb), nearest_customer_bridge (ncb),
@@ -84,7 +93,7 @@ define openlldp::config::tlv (
   validate_re($mngAddr,  $states, '$mngAddr parameter must be yes or no.')
   #validate_re($status, $states, '$status parameter must be yes or no.')
   case $portIDsubtype {
-    undef:
+    undef: {}
     /^(mac|MAC|PORT_ID_MAC_ADDRESS)$/: { $portIDsubtype = 'PORT_ID_MAC_ADDRESS' }
     /^(ip|IP|PORT_ID_NETWORK_ADDRESS)$/: { $portIDsubtype = 'PORT_ID_NETWORK_ADDRESS' }
     /^(ifname|Ifname|PORT_ID_INTERFACE_NAME)$/: { $portIDsubtype = 'PORT_ID_INTERFACE_NAME' }
