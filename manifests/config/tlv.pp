@@ -94,9 +94,9 @@ define openlldp::config::tlv (
   #validate_re($status, $states, '$status parameter must be yes or no.')
   case $portIDsubtype {
     undef: {}
-    /^(mac|MAC|PORT_ID_MAC_ADDRESS)$/: { $portIDsubtype = 'PORT_ID_MAC_ADDRESS' }
-    /^(ip|IP|PORT_ID_NETWORK_ADDRESS)$/: { $portIDsubtype = 'PORT_ID_NETWORK_ADDRESS' }
-    /^(ifname|Ifname|PORT_ID_INTERFACE_NAME)$/: { $portIDsubtype = 'PORT_ID_INTERFACE_NAME' }
+    /^(mac|MAC|PORT_ID_MAC_ADDRESS)$/: { $_portIDsubtype = 'PORT_ID_MAC_ADDRESS' }
+    /^(ip|IP|PORT_ID_NETWORK_ADDRESS)$/: { $_portIDsubtype = 'PORT_ID_NETWORK_ADDRESS' }
+    /^(ifname|Ifname|PORT_ID_INTERFACE_NAME)$/: { $_portIDsubtype = 'PORT_ID_INTERFACE_NAME' }
     default: {
       fail('$portIDsubtype parameter, if set, must be "mac", "ip" or "ifname"')
     }
@@ -143,8 +143,8 @@ define openlldp::config::tlv (
   }
   if $portIDsubtype {
     exec { "set-tlv ${interface} portID: subtype > ${portIDsubtype}" :
-      command => "lldptool set-tlv -i ${interface} ${scope} -V portID -c subtype=${portIDsubtype}",
-      unless  => "test \"$(lldptool get-tlv -i ${interface} ${scope} -V portID -c subtype)\" = \"subtype=${portIDsubtype}\"",
+      command => "lldptool set-tlv -i ${interface} ${scope} -V portID -c subtype=${_portIDsubtype}",
+      unless  => "test \"$(lldptool get-tlv -i ${interface} ${scope} -V portID -c subtype)\" = \"subtype=${_portIDsubtype}\"",
     }
   }
 #  exec { "set-tlv ${interface} status" :
