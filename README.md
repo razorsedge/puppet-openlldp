@@ -44,6 +44,7 @@ openlldp::config::tlv { 'eth0':
   sysDesc  => 'yes',
   sysCap   => 'yes',
   mngAddr  => 'yes',
+  portIDsubtype => 'ifname',  #portID TLV can display mac, ip or ifname (interface name).
 }
 ```
 

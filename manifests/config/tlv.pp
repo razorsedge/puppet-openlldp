@@ -65,6 +65,7 @@ define openlldp::config::tlv (
   $sysDesc     = 'no',
   $sysCap      = 'no',
   $mngAddr     = 'no',
+  $portIDsubtype = undef,
 #  $macPhyCfg   = 'no',
 #  $powerMdi    = 'no',
 #  $linkAgg     = 'no',
@@ -82,6 +83,15 @@ define openlldp::config::tlv (
   validate_re($sysCap,   $states, '$sysCap parameter must be yes or no.')
   validate_re($mngAddr,  $states, '$mngAddr parameter must be yes or no.')
   #validate_re($status, $states, '$status parameter must be yes or no.')
+  case $portIDsubtype {
+    undef:
+    /^(mac|MAC|PORT_ID_MAC_ADDRESS)$/: { $portIDsubtype = 'PORT_ID_MAC_ADDRESS' }
+    /^(ip|IP|PORT_ID_NETWORK_ADDRESS)$/: { $portIDsubtype = 'PORT_ID_NETWORK_ADDRESS' }
+    /^(ifname|Ifname|PORT_ID_INTERFACE_NAME)$/: { $portIDsubtype = 'PORT_ID_INTERFACE_NAME' }
+    default: {
+      fail('$portIDsubtype parameter, if set, must be "mac", "ip" or "ifname"')
+    }
+  }
   case $bridgescope {
     /^(nearest_bridge|nb)$/: {
       $scope = '-g nb'
@@ -121,6 +131,12 @@ define openlldp::config::tlv (
   exec { "set-tlv ${interface} mngAddr" :
     command => "lldptool set-tlv -i ${interface} ${scope} -V mngAddr -c enableTx=${mngAddr}",
     onlyif  => "lldptool get-tlv -i ${interface} ${scope} -V mngAddr -c enableTx | grep -qv enableTx=${mngAddr}",
+  }
+  if $portIDsubtype {
+    exec { "set-tlv ${interface} portID: subtype > ${portIDsubtype}" :
+      command => "lldptool set-tlv -i ${interface} ${scope} -V portID -c subtype=${portIDsubtype}",
+      unless  => "test \"$(lldptool get-tlv -i ${interface} ${scope} -V portID -c subtype)\" = \"subtype=${portIDsubtype}\"",
+    }
   }
 #  exec { "set-tlv ${interface} status" :
 #    command => "lldptool set-tlv -i ${interface} ${scope} -V status -c enableTx=${status}",
