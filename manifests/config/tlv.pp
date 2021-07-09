@@ -117,8 +117,8 @@ define openlldp::config::tlv (
   }
 
   Exec {
-    # /bin/grep & /usr/sbin/lldptool
-    path => ['/bin', '/usr/sbin']
+    # /bin/grep, /usr/bin/test & /usr/sbin/lldptool
+    path => ['/bin', '/usr/bin', '/usr/sbin']
   }
 
   exec { "set-tlv ${interface} portDesc" :
